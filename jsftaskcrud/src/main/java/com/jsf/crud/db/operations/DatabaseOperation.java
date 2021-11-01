@@ -21,12 +21,13 @@ public class DatabaseOperation {
     public static PreparedStatement pstmt;
  
     public static Connection getConnection(){  
-        try{  
-        	String url = "jdbc:postgresql://localhost/test";
+        try{ 
+        	Class.forName("org.postgresql.Driver");
+
+        	String url = "jdbc:postgresql://localhost:5432/postgres";
         	Properties props = new Properties();
         	props.setProperty("user","postgres");
         	props.setProperty("password","123456");
-        	props.setProperty("ssl","true");
         	
         	connObj = DriverManager.getConnection(url, props);
 
@@ -84,7 +85,6 @@ public class DatabaseOperation {
         TarefaBean editTarefa = null;
         System.out.println("editTarefaListInDB() : Tarefa Id: " + tarefaId);
  
-
         Map<String,Object> sessionMapObj = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
  
         try {
@@ -109,7 +109,7 @@ public class DatabaseOperation {
  
     public static String updateTarefaDetailsInDB(TarefaBean updateTarefaObj) {
         try {
-            pstmt = getConnection().prepareStatement("update tarefa_lista set tarefa_titulo=?, tarefa_status=?, tarefa_descricao=?, tarefa_data=?, where tarefa_id=?");    
+            pstmt = getConnection().prepareStatement("update tarefa_lista set tarefa_titulo=?, tarefa_status=?, tarefa_descricao=?, tarefa_data=?"+ "where tarefa_id=?");    
             pstmt.setString(1,updateTarefaObj.getTitulo());  
             pstmt.setString(2,updateTarefaObj.getStatus());  
             pstmt.setString(3,updateTarefaObj.getDescricao());  

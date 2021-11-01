@@ -18,7 +18,7 @@ public class TarefaBean {
     private String descricao;  
     private String data;
  
-    public ArrayList<TarefaBean>tarefaListFromDB;
+    public ArrayList<TarefaBean>tarefaList;
     
     public int getId() {
         return id;  
@@ -59,16 +59,26 @@ public class TarefaBean {
     public void setData(String data) {
         this.data = data;
     }
-     
-    @PostConstruct
+       
+    @Override
+	public String toString() {
+		return "TarefaBean [id=" + id + ", titulo=" + titulo + ", status=" + status + ", descricao=" + descricao
+				+ ", data=" + data + ", tarefaList=" + tarefaList + "]";
+	}
+
+	@PostConstruct
+    
     public void init() {
-        tarefaListFromDB = DatabaseOperation.getTarefaListFromDB();
+    	tarefaList = new ArrayList<TarefaBean>();
+        tarefaList = DatabaseOperation.getTarefaListFromDB();
+
     }
  
-    public ArrayList<TarefaBean> tarefaList() {
-		return tarefaListFromDB;
+	public ArrayList<TarefaBean> tarefaList() {
+		this.init();
+		return tarefaList;
 	}
-     
+    
     public String saveTarefaDetails(TarefaBean newTarefaObj) {
         return DatabaseOperation.saveTarefaDetailsInDB(newTarefaObj);
     }
