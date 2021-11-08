@@ -48,7 +48,8 @@ public class DatabaseOperation {
                 stuObj.setTitulo(resultSetObj.getString("tarefa_titulo"));  
                 stuObj.setStatus(resultSetObj.getString("tarefa_status"));  
                 stuObj.setDescricao(resultSetObj.getString("tarefa_descricao"));  
-                stuObj.setData(resultSetObj.getString("tarefa_data"));  
+                stuObj.setData(resultSetObj.getString("tarefa_data"));
+                stuObj.setTelefone(resultSetObj.getString("tarefa_telefone"));
                 tarefaList.add(stuObj);  
             }   
             System.out.println("Total Lista: " + tarefaList.size());
@@ -63,11 +64,12 @@ public class DatabaseOperation {
         int saveResult = 0;
         String navigationResult = "";
         try {      
-            pstmt = getConnection().prepareStatement("insert into tarefa_lista (tarefa_titulo, tarefa_status, tarefa_descricao, tarefa_data) values (?, ?, ?, ?)");         
+            pstmt = getConnection().prepareStatement("insert into tarefa_lista (tarefa_titulo, tarefa_status, tarefa_descricao, tarefa_data, tarefa_telefone) values (?, ?, ?, ?, ?)");         
             pstmt.setString(1, newTarefaObj.getTitulo());
             pstmt.setString(2, newTarefaObj.getStatus());
             pstmt.setString(3, newTarefaObj.getDescricao());
             pstmt.setString(4, newTarefaObj.getData());
+            pstmt.setString(5, newTarefaObj.getTelefone());
             saveResult = pstmt.executeUpdate();
             connObj.close();
         } catch(Exception sqlException) {
@@ -97,7 +99,8 @@ public class DatabaseOperation {
                 editTarefa.setTitulo(resultSetObj.getString("tarefa_titulo"));
                 editTarefa.setStatus(resultSetObj.getString("tarefa_status"));
                 editTarefa.setDescricao(resultSetObj.getString("tarefa_descricao"));
-                editTarefa.setData(resultSetObj.getString("tarefa_data")); 
+                editTarefa.setData(resultSetObj.getString("tarefa_data"));
+                editTarefa.setTelefone(resultSetObj.getString("tarefa_telefone"));
             }
             sessionMapObj.put("editTarefaObj", editTarefa);
             connObj.close();
@@ -109,12 +112,13 @@ public class DatabaseOperation {
  
     public static String updateTarefaDetailsInDB(TarefaBean updateTarefaObj) {
         try {
-            pstmt = getConnection().prepareStatement("update tarefa_lista set tarefa_titulo=?, tarefa_status=?, tarefa_descricao=?, tarefa_data=?"+ "where tarefa_id=?");    
+            pstmt = getConnection().prepareStatement("update tarefa_lista set tarefa_titulo=?, tarefa_status=?, tarefa_descricao=?, tarefa_data=?, tarefa_telefone=?"+ "where tarefa_id=?");    
             pstmt.setString(1,updateTarefaObj.getTitulo());  
             pstmt.setString(2,updateTarefaObj.getStatus());  
             pstmt.setString(3,updateTarefaObj.getDescricao());  
-            pstmt.setString(4,updateTarefaObj.getData());   
-            pstmt.setInt(5,updateTarefaObj.getId());  
+            pstmt.setString(4,updateTarefaObj.getData());
+            pstmt.setString(5,updateTarefaObj.getTelefone()); 
+            pstmt.setInt(6,updateTarefaObj.getId());  
             pstmt.executeUpdate();
             connObj.close();            
         } catch(Exception sqlException) {

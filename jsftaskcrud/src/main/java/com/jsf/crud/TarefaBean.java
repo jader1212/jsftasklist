@@ -17,7 +17,8 @@ public class TarefaBean {
     private String status;  
     private String descricao;  
     private String data;
- 
+    private String telefone;
+    
     public ArrayList<TarefaBean>tarefaList;
     
     public int getId() {
@@ -60,10 +61,18 @@ public class TarefaBean {
         this.data = data;
     }
        
+    public String getTelefone() {
+    	return telefone;
+    }
+    
+    public void setTelefone(String telefone) {
+    	this.telefone = telefone;
+    }
+  
     @Override
 	public String toString() {
 		return "TarefaBean [id=" + id + ", titulo=" + titulo + ", status=" + status + ", descricao=" + descricao
-				+ ", data=" + data + ", tarefaList=" + tarefaList + "]";
+				+ ", data=" + data + ", telefone=" + telefone + ", tarefaList=" + tarefaList + "]";
 	}
 
 	@PostConstruct
@@ -71,7 +80,6 @@ public class TarefaBean {
     public void init() {
     	tarefaList = new ArrayList<TarefaBean>();
         tarefaList = DatabaseOperation.getTarefaListFromDB();
-
     }
  
 	public ArrayList<TarefaBean> tarefaList() {
@@ -94,4 +102,4 @@ public class TarefaBean {
     public String deleteTarefaList(int tarefaId) {
         return DatabaseOperation.deleteTarefaListInDB(tarefaId);
     }
-}  
+}

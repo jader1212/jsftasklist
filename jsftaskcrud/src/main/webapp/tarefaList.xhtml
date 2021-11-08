@@ -1,7 +1,8 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:f="http://xmlns.jcp.org/jsf/core">
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
      
 <h:head>
     <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1" http-equiv="X-UA-Conpatible" />
@@ -42,16 +43,20 @@
                 <h:outputText value="#{tarefa.data}" />
             </h:column>
             <h:column>
+                <f:facet name="header">Telefone</f:facet>
+                <h:outputText value="#{tarefa.telefone}" />
+            </h:column>
+            <h:column>
                 <f:facet name="header">Alterar</f:facet>
-                <h:commandButton action="#{tarefaBean.editTarefaList(tarefa.id)}" value="Alterar" class="btn btn-primary" />
+                <p:commandButton action="#{tarefaBean.editTarefaList(tarefa.id)}" value="Alterar" class="btn btn-primary" />
             </h:column>
             <h:column>
                 <f:facet name="header">Deletar</f:facet>
-                <h:commandButton action="#{tarefaBean.deleteTarefaList(tarefa.id)}" value="Deletar" class="btn btn-danger" />
+                <p:commandButton action="#{tarefaBean.deleteTarefaList(tarefa.id)}" value="Deletar" class="btn btn-danger" />
             </h:column>
         </h:dataTable>
         <center>
-            <h:commandButton action="createTarefa.xhtml?faces-redirect=true" value="Criar Nova Tarefa" class="btn btn-success btnSpace" />
+            <p:commandButton action="createTarefa.xhtml?faces-redirect=true" value="Criar Nova Tarefa" class="btn btn-success btnSpace" />
         </center>
     </h:form>
 </h:body>

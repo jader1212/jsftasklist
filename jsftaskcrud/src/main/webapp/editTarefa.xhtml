@@ -1,7 +1,8 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:f="http://xmlns.jcp.org/jsf/core">
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
  
 <h:head>
     <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1" http-equiv="X-UA-Conpatible" />
@@ -35,7 +36,13 @@
             <div class="form-group">
                 <h:outputLabel class="control-label col-sm-2">Data:</h:outputLabel>
                 <div class="col-sm-4">
-                    <h:inputText value="#{editTarefaObj.data}" class="form-control"/>
+                <p:inputMask value="#{editTarefaObj.data}" class="form-control" mask="99/99/9999" validateMask="true"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <h:outputLabel class="control-label col-sm-2">Telefone:</h:outputLabel>
+                <div class="col-sm-4">
+                <p:inputMask value="#{editTarefaObj.telefone}" class="form-control" mask="(99) 99999-9999" validateMask="true"/>
                 </div>
             </div>
             <div class="form-group">
@@ -47,7 +54,7 @@
             <div class="form-group">
                 <div class="col-sm-2"></div>
                 <div class="col-sm-4">
-                    <h:commandButton value="Atualizar" action="#{tarefaBean.updateTarefaDetails(editTarefaObj)}" class="btn btn-primary updateBtnStyle" />
+                    <p:commandButton value="Atualizar" action="#{tarefaBean.updateTarefaDetails(editTarefaObj)}" class="btn btn-primary updateBtnStyle" />
                 </div>
             </div>
         </h:form>
